@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # 서드파티 앱
     'rest_framework',
+    'rest_framework.authtoken', # 토큰 인증 사용
 
     # 만든 앱들
     'hospital',
@@ -138,3 +139,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 커스텀 User 모델 지정
 AUTH_USER_MODEL = 'user.User'
+
+# REST Framework 전역 설정
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # 토큰 기반 인증
+        'rest_framework.authentication.SessionAuthentication',  # 세션 인증
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',  # 기본적으로 인증 필요
+    ]
+}
